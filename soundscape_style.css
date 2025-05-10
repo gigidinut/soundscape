@@ -31,35 +31,38 @@ h1 {
 
 .sound-controls-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-template-columns: repeat(2, 1fr); /* Default for wider screens */
     gap: 30px 50px;
     max-width: 700px;
     width: 100%;
-    z-index: 1; /* Ensure controls are above canvas */
-    position: relative; /* Needed for z-index to work properly with fixed canvas */
+    z-index: 1;
+    position: relative;
 }
 
 .sound-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 15px; /* You might reduce this slightly on mobile if needed */
 }
 
 .sound-item button {
     background-color: #2b6dbf;
     color: black;
     border: none;
-    padding: 15px 30px;
+    padding: 15px 30px; /* Consider if this padding is too large on small buttons */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1em;
+    font-size: 1em; /* This will scale with the base font */
     font-weight: bold;
     margin-bottom: 10px;
     cursor: pointer;
     border-radius: 30px;
-    min-width: 200px;
+    min-width: 200px; /* This might be too wide for mobile in a single column */
+    width: 90%; /* Start with a width, adjust as needed */
+    max-width: 280px; /* Ensure buttons don't get excessively wide */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
     transition: background-color 0.2s ease-in-out, transform 0.1s ease;
 }
 
@@ -136,7 +139,7 @@ h1 {
 }
 
 #settingsPanel {
-    display: none; /* Initially hidden */
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -146,12 +149,15 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.25);
     z-index: 101;
-    width: 350px;
-    max-height: 90vh; /* Max height for smaller screens */
-    overflow-y: auto; /* Scroll if content overflows */
+    width: 90%; /* Make width responsive */
+    max-width: 350px; /* Keep the desktop max-width */
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
     color: #333;
     border: 1px solid #ddd;
 }
+
 #settingsPanel.visible {
     display: block;
 }
@@ -239,4 +245,79 @@ h1 {
 }
 #applySettingsButton:hover {
     background-color: #a170ef;
+}
+
+/* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+
+/* Target screens smaller than, say, 768px (typical tablet portrait) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em; /* Slightly smaller title on smaller screens */
+        margin-bottom: 30px;
+    }
+
+    .sound-controls-grid {
+        grid-template-columns: 1fr; /* Stack to a single column */
+        gap: 20px; /* Reduce gap for single column */
+        padding-left: 10px; /* Add some padding if content gets too close to edges */
+        padding-right: 10px;
+    }
+
+    .sound-item button {
+        min-width: initial; /* Remove the desktop min-width */
+        width: 100%; /* Make buttons take full width of their grid cell */
+        max-width: 400px; /* Or whatever looks good, centered by sound-item */
+        padding: 12px 20px; /* Potentially reduce padding slightly */
+        font-size: 0.9em; /* Slightly smaller font on buttons if needed */
+    }
+
+    .sound-item {
+        padding: 10px; /* Reduce padding on individual items */
+    }
+
+    #settingsPanel {
+        padding: 20px; /* Reduce padding on settings panel */
+    }
+    #settingsPanel h2 {
+        font-size: 1.5em;
+    }
+    #settingsPanel h3 {
+        font-size: 1.1em;
+    }
+    #settingsPanel label {
+        font-size: 0.85em;
+    }
+
+    /* You might want to make the settings button slightly larger or ensure it has enough padding */
+    #settingsButton {
+        padding: 12px 18px; /* Ensure good touch target */
+    }
+}
+
+/* Target even smaller screens, e.g., typical mobile phones */
+@media (max-width: 480px) {
+    body {
+        padding: 10px; /* Reduce overall body padding */
+    }
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .sound-controls-grid {
+        gap: 15px;
+    }
+
+    .sound-item button {
+        font-size: 0.85em; /* Further adjust font if necessary */
+        padding: 10px 15px;
+    }
+
+    #settingsPanel {
+        width: 95%; /* Almost full width on very small screens */
+        padding: 15px;
+    }
+     #settingsPanel h2 {
+        font-size: 1.4em;
+    }
 }
