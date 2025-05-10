@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundScape</title>
+    <link rel="stylesheet" href="soundscape_style.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <button id="settingsButton">Settings</button>
+
+    <div id="settingsPanel">
+        <h2>Settings</h2>
+        <button id="closeSettingsButton">&times;</button>
+
+        <div>
+            <label for="bgColorInput">Background Color:</label>
+            <input type="color" id="bgColorInput">
+        </div>
+        <hr>
+        <h3>Particles</h3>
+        <div>
+            <label for="particleColorInput">Particle Color:</label> <!-- NEW -->
+            <input type="color" id="particleColorInput"> <!-- NEW -->
+        </div>
+        <div>
+            <label for="numParticlesInput">Number of Particles (10-1000):</label>
+            <input type="number" id="numParticlesInput" min="10" max="1000">
+        </div>
+        <div class="range-container">
+            <label for="particleSizeInput">Max Particle Size (1-10):</label>
+            <input type="range" id="particleSizeInput" min="1" max="10" step="0.5">
+            <span class="range-value-display" id="particleSizeValue"></span>
+        </div>
+        <div class="range-container">
+            <label for="particleSpeedInput">Max Particle Speed (0.1-2.0):</label>
+            <input type="range" id="particleSpeedInput" min="0.1" max="2.0" step="0.1">
+            <span class="range-value-display" id="particleSpeedValue"></span>
+        </div>
+        <div class="range-container">
+            <label for="connectDistanceInput">Connection Distance (20-200):</label>
+            <input type="range" id="connectDistanceInput" min="20" max="200" step="5">
+            <span class="range-value-display" id="connectDistanceValue"></span>
+        </div>
+        
+        <button id="applySettingsButton">Apply</button> <!-- Changed button text -->
+    </div>
+
+    <h1>SoundScape</h1>
+
+    <div class="sound-controls-grid" id="soundControlsGrid">
+        <!-- Sound items will be dynamically inserted here by JavaScript -->
+    </div>
+
+    <script src="soundscape_script.js"></script>
+    
+</body>
+</html>
